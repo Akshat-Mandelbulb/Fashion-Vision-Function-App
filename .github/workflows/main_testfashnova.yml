@@ -72,6 +72,8 @@ jobs:
           app-name: 'testfashnova'
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_86B5D4B04DAD4DCF8A46A4F1E6354165 }}
           sku: 'flexconsumption'
+          remote-build: true
         
