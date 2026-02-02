@@ -19,7 +19,8 @@ class VisionAnalysisController:
         }
         """
         try:
-            image_url = req.params.get("image_url")
+            req_json = req.get_json()
+            image_url = req_json.get("image_url")
             if not image_url or not re.search(URL_REGEX, image_url):
                 raise InvalidRequestError()
 
