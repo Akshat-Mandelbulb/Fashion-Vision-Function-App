@@ -1,5 +1,6 @@
 import json
 import re
+from http import HTTPStatus
 
 from azure.functions import HttpRequest, HttpResponse
 
@@ -26,9 +27,21 @@ class VisionAnalysisController:
             result = await VisionAnalysisService.analyse_image_url(image_url)
 
             return HttpResponse(
-                json.dumps(result.model_to_dict()),
+                json.dumps({"success": True, "data": result.model_to_dict()}),
                 status_code=200,
                 mimetype="application/json",
             )
+        except InvalidRequestError as e:
+            return HttpResponse(
+                json.dumps({"success": False, "message": e.message}),
+                status_code=(
+                    e.status_code if e.status_code else HTTPStatus.INTERNAL_SERVER_ERROR
+                ),
+                mimetype="application/json",
+            )
         except Exception as e:
-            raise e
+            return HttpResponse(
+                json.dumps({"success": False, "error": str(e)}),
+                status_code=500,
+                mimetype="application/json",
+            )
