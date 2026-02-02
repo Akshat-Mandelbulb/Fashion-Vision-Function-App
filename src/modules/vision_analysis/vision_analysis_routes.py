@@ -6,6 +6,6 @@ vision_analysis_bp = Blueprint()
 
 
 @vision_analysis_bp.route(route="analyse-image", methods=["POST"])
-def analyze_image(req):
+async def analyze_image(req):
     print("Analyzing image: ", req)
-    return VisionAnalysisController.analyze_image_from_url(req)
+    return await VisionAnalysisController.analyze_image_from_url(req)
