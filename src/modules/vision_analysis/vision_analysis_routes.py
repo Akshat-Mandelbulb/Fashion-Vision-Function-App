@@ -10,5 +10,4 @@ vision_analysis_bp = Blueprint()
 
 @vision_analysis_bp.route(route="analyse-image", methods=["POST"])
 async def analyze_image(req: HttpRequest):
-    logger.info(f"\n🧠==>> req: {req.params}")
     return await VisionAnalysisController.analyze_image_from_url(req)
