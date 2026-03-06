@@ -72,6 +72,8 @@ jobs:
           app-name: 'fashion-vision-app'
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EAD373E523B84F3AAAB5B968352B9E8A }}
           sku: 'flexconsumption'
+          remote-build: true
         
